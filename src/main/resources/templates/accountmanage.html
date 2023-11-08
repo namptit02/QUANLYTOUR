@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý tài khoản</title>
+</head>
+<body>
+<h1>Thông tin cá nhân</h1>
+<div th:if="${successMessage}" class="alert alert-success" role="alert">
+    Thay đổi đã được lưu thành công.
+</div>
+<form action="/updateUser" method="post">
+    <table>
+        <tr>
+            <td>Username:</td>
+            <td>
+                <input type="text" name="username" th:value="${user.username}">
+            </td>
+        </tr>
+        <tr>
+            <td>Full Name:</td>
+            <td>
+                <input type="text" name="fullname" th:value="${user.fullname}">
+            </td>
+        </tr>
+        <tr>
+            <td>Date of Birth:</td>
+            <td>
+                <input type="date" name="dob" th:value="${#dates.format(user.dob, 'yyyy-MM-dd')}">
+            </td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td>
+                <input type="text" name="address" th:value="${user.address}">
+            </td>
+        </tr>
+        <tr>
+            <td>Hometown:</td>
+            <td>
+                <input type="text" name="hometown" th:value="${user.hometown}">
+            </td>
+        </tr>
+        <tr>
+            <td>Phone Number:</td>
+            <td>
+                <input type="text" name="phoneNumber" th:value="${user.phoneNumber}">
+            </td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>
+                <input type="email" name="email" th:value="${user.email}">
+            </td>
+        </tr>
+    </table>
+    <button type="submit">Lưu thay đổi</button>
+</form>
+</body>
+</html>
