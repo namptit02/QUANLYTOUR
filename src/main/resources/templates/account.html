@@ -1,0 +1,93 @@
+
+
+<!--            <td>Full Name:</td>-->
+<!--            <td>-->
+<!--                <input type="text" name="fullname" id="fullname" th:value="${user.fullname}" readonly>-->
+<!--                <button type="button" onclick="enableEdit('fullname')">Edit</button>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Date of Birth:</td>-->
+<!--            <td>-->
+<!--                <input type="date" name="dob" id="dob" th:value="${#dates.format(user.dob, 'yyyy-MM-dd')}" readonly>-->
+<!--                <button type="button" onclick="enableEdit('dob')">Edit</button>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Address:</td>-->
+<!--            <td>-->
+<!--                <input type="text" name="address" id="address" th:value="${user.address}" readonly>-->
+<!--                <button type="button" onclick="enableEdit('address')">Edit</button>-->
+<!--            </td>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Manage</title>
+    <script>
+        function enableEdit(inputId) {
+            var input = document.getElementById(inputId);
+            input.removeAttribute("readonly");
+        }
+
+        function confirmSave() {
+            return confirm("Bạn có chắc chắn muốn lưu các thay đổi?");
+        }
+    </script>
+</head>
+<body>
+<h1>Thông tin cá nhân</h1>
+<div th:if="${successMessage}" class="alert alert-success" role="alert">
+    Thay đổi đã được lưu thành công.
+</div>
+<form action="/updateUser" method="post" onsubmit="return confirmSave()">
+    <table>
+        <tr>
+            <td>Full Name:</td>
+            <td>
+                <input type="text" name="fullname" id="fullname" th:value="${user.fullname}" readonly>
+                <button type="button" onclick="enableEdit('fullname')">Edit</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Date of Birth:</td>
+            <td>
+                <input type="date" name="dob" id="dob" th:value="${#dates.format(user.dob, 'yyyy-MM-dd')}" readonly>
+                <button type="button" onclick="enableEdit('dob')">Edit</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td>
+                <input type="text" name="address" id="address" th:value="${user.address}" readonly>
+                <button type="button" onclick="enableEdit('address')">Edit</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Hometown:</td>
+            <td>
+                <input type="text" name="hometown" id="hometown" th:value="${user.hometown}" readonly>
+                <button type="button" onclick="enableEdit('hometown')">Edit</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Phone Number:</td>
+            <td>
+                <input type="text" name="phoneNumber" id="phoneNumber" th:value="${user.phoneNumber}" readonly>
+                <button type="button" onclick="enableEdit('phoneNumber')">Edit</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>
+                <input type="email" name="email" id="email" th:value="${user.email}" readonly>
+                <button type="button" onclick="enableEdit('email')">Edit</button>
+            </td>
+        </tr>
+    </table>
+    <button type="submit">Lưu thay đổi</button>
+</form>
+</body>
+</html>

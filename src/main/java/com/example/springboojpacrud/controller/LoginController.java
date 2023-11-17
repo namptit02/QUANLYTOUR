@@ -20,12 +20,12 @@ public class LoginController {
     UserService userService;
 
     @GetMapping("/")
-    public String homePage(Model model, HttpSession httpSession) {
+    public String homePage() {
         return "redirect:/login";
     }
 
     @GetMapping("/login")
-    public String loginPage(Model model, HttpSession httpSession) throws IOException {
+    public String loginPage( HttpSession httpSession) throws IOException {
         User user = (User) httpSession.getAttribute("user");
         if (user != null) {
             if (user.getRole().equals("admin")) {
@@ -37,22 +37,8 @@ public class LoginController {
         return "login";
     }
     @PostMapping("/login")
-    public String login(@RequestParam("username") String username, @RequestParam("password") String password, Model model, HttpSession httpSession) {
-        User user = userService.findByUsername(username);
-        if(user!=null){
-            if(user.getPassword().equals(password)) {
-                httpSession.setAttribute("user", user);
-                if(user.getRole().equals("admin")) {
-                    return "redirect:/admin";
-                }else if(user.getRole().equals("user")) {
-                    return "redirect:/user";
-                }
-            }else {
-                return "errorlogin";
-            }
-        }
-
-        return "error";
+    public String login(@RequestParam("username") String username, @RequestParam("password") String password,  HttpSession httpSession) {
+        return userService.checkLogin(username,password,httpSession);
     }
 
     @GetMapping("/register")
@@ -95,6 +81,22 @@ public class LoginController {
         httpSession.invalidate();
         return "redirect:/login";
     }
+    @GetMapping("/user")
+    public String getUserPage(Model model, HttpSession httpSession) {
+        User user = (User) httpSession.getAttribute("user");
+        if(user!=null){
+            model.addAttribute("user",user);
+        }
+        return "user";
+    }
+    @GetMapping("/admin")
+    public String getAdminPage(Model model, HttpSession httpSession) {
+        User user = (User) httpSession.getAttribute("user");
+        if(user!=null){
+            model.addAttribute("user",user);
+        }
 
+        return "admin";
+    }
 
 }

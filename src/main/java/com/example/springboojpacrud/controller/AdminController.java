@@ -8,9 +8,5 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AdminController {
     @Autowired
     UserService userService;
-    @GetMapping("/admin")
-    public String adminPage() {
-        // Handle the admin page
-        return "admin"; // Make sure this matches your Thymeleaf template name
-    }
+
 }
