@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function enableEdit(inputId) {
+            var input = document.getElementById(inputId);
+            input.removeAttribute("readonly");
+        }
+
+        function confirmSave() {
+            return confirm("Bạn có chắc chắn muốn lưu các thay đổi?");
+        }
+    </script>
+</head>
+<body>
+<form action="/updateUser" method="post" onsubmit="return confirmSave()">
+<table>
+    <tr>
+        <td>Full Name:</td>
+        <td>
+            <input type="text" name="fullname" id="fullname" th:value="${user.fullname}" readonly>
+            <button type="button" onclick="enableEdit('fullname')">Edit</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Address:</td>
+        <td>
+            <input type="text" name="address" id="address" th:value="${user.address}" readonly>
+            <button type="button" onclick="enableEdit('address')">Edit</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Phone Number:</td>
+        <td>
+            <input type="text" name="phoneNumber" id="phoneNumber" th:value="${user.phoneNumber}" readonly>
+            <button type="button" onclick="enableEdit('phoneNumber')">Edit</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td>
+            <input type="email" name="email" id="email" th:value="${user.email}" readonly>
+            <button type="button" onclick="enableEdit('email')">Edit</button>
+        </td>
+    </tr>
+    <tr>
+        <td>Tour Name:</td>
+        <td><span th:text="${tour.tourName}"></span></td>
+    </tr>
+    <tr>
+        <td>Start Date:</td>
+        <td>
+    <span th:if="${tour.tourCheckIns != null and not #lists.isEmpty(tour.tourCheckIns)}">
+        <span th:text="${#dates.format(tour.tourCheckIns[0].startDate, 'dd/MM/yyyy')}"></span>
+    </span>
+            <span th:unless="${tour.tourCheckIns != null and not #lists.isEmpty(tour.tourCheckIns)}">N/A</span>
+        </td>
+
+    </tr>
+    <tr>
+        <td>Number of Tickets:</td>
+        <td><span th:text="${numberOfTickets}"></span></td>
+    </tr>
+    <tr>
+        <td>Price per Ticket:</td>
+        <td><span th:text="${tour.priceTicket}"></span></td>
+    </tr>
+    <tr>
+        <td>Total Price:</td>
+        <td><span th:id="totalPrice">0.00</span></td>
+    </tr>
+    <tr>
+        <td>Book Date:</td>
+        <td><span th:text="${#dates.format(#now, 'dd/MM/yyyy HH:mm')}"></span></td>
+    </tr>
+</table>
+<button type="submit">Chi tiết thanh toán</button>
+</form>
+<script th:inline="javascript">
+    /* Lấy giá vé từ biểu thức Thymeleaf */
+    var pricePerTicket = [[${tour.priceTicket}]];
+
+    document.getElementById('numberOfTickets').addEventListener('input', function () {
+        var numberOfTickets = parseInt(document.getElementById('numberOfTickets').value);
+        var totalPrice = pricePerTicket * numberOfTickets;
+        document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
+    });
+</script>
+</body>
+</html>

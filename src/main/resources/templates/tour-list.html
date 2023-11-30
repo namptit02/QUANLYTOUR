@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tour List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Tour List</h1>
+
+    <!-- Form for search -->
+    <form method="get" action="tour-list/search" class="form-inline mb-2">
+        <input type="text" name="keyword" class="form-control mr-sm-2" placeholder="Enter keyword">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tour Name</th>
+            <th>List Places</th>
+            <th>List Tour Schedule</th>
+            <th>Time of Stay</th>
+            <th>Transport</th>
+            <th>Price Ticket</th>
+            <th>Suppliers</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tour : ${tours}">
+            <td th:text="${tour.id}"></td>
+            <td>
+                <a th:href="@{/tour-list/tour-detail/{id}(id=${tour.id})}">
+                    <span th:text="${tour.tourName}"></span>
+                </a>
+
+            </td>
+            <td>
+                <ul>
+                    <li th:each="tourPlace : ${tour.tourPlaces}">
+                        <span th:text="${tourPlace.place.placeName}"></span>
+                    </li>
+                </ul>
+            </td>
+            <td th:text="${tour.tourSchedule}"></td>
+            <td th:text="${tour.timeOfStay}"></td>
+            <td th:text="${tour.transport}"></td>
+            <td th:text="${tour.priceTicket}"></td>
+            <td>
+                <ul>
+                    <li th:each="tourPlace : ${tour.tourPlaces}">
+                        <ul th:each="supplierTourPlace : ${tourPlace.supplierTourPlaces}">
+                            <li th:text="${supplierTourPlace.supplier.supplierName}"></li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-@Table(name = "db_user")
+@Table(name = "User")
 @Entity
 
 public class User {
@@ -31,5 +31,6 @@ public class User {
     private String email;
     private String role;
 
-
+    @OneToMany(mappedBy = "user")
+    private List<Booking> bookings;
 }

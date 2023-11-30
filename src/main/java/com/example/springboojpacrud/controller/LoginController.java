@@ -77,7 +77,7 @@ public class LoginController {
     }
     @GetMapping("/logout")
     public String logout(Model model, HttpSession httpSession) {
-        User user = (User)httpSession.getAttribute("user");
+//        User user = (User)httpSession.getAttribute("user");
         httpSession.invalidate();
         return "redirect:/login";
     }

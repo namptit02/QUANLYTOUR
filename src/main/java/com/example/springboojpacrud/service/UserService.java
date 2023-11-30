@@ -14,7 +14,6 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-//    private static List<User> listUser = new ArrayList<>();
 
 
     public void registerUser(User user) {
@@ -27,16 +26,9 @@ public class UserService {
         return existingUser != null;
     }
 
-    public User findByUsername(String username) {
 
-        return userRepository.findByUsername(username);
 
-    }
 
-    public User findById(int id) {
-        Optional<User> userOptional = userRepository.findById(id);
-        return userOptional.orElse(null);
-    }
     public void save(User user) {
         userRepository.save(user);
     }
