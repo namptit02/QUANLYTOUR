@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Tour List</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+  <h1>Direct Payment</h1>
+
+  <!-- Form for search -->
+  <form method="get" action="direct-payment/search" class="form-inline mb-2">
+    <input type="text" name="keyword" class="form-control mr-sm-2" placeholder="Enter keyword">
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Fullname</th>
+      <th>DOB</th>
+      <th>Phone</th>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Hiển thị danh sách khách hàng -->
+    <tr th:each="user : ${users}">
+      <td th:text="${user.id}"></td>
+      <td th:text="${user.username}"></td>
+      <td th:text="${user.fullname}"></td>
+      <td th:text="${#dates.format(user.dob, 'dd/MM/yyyy')}"></td>
+      <td th:text="${user.phoneNumber}"></td>
+      <td th:text="${user.email}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

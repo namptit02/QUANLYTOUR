@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Bill</title>
+</head>
+<body>
+<h1>Đây là trang Payment</h1>
+<table>
+    <tr>
+        <td>Tour Name:</td>
+        <td><span th:text="${tour.tourName}"></span></td>
+    </tr>
+    <tr>
+        <td>Start Date:</td>
+        <td>
+    <span th:if="${tour.tourCheckIns != null and not #lists.isEmpty(tour.tourCheckIns)}">
+        <span th:text="${#dates.format(tour.tourCheckIns[0].startDate, 'dd/MM/yyyy')}"></span>
+    </span>
+            <span th:unless="${tour.tourCheckIns != null and not #lists.isEmpty(tour.tourCheckIns)}">N/A</span>
+        </td>
+
+    </tr>
+    <tr>
+        <td>Price per Ticket:</td>
+        <td><span th:text="${tour.priceTicket}"></span></td>
+    </tr>
+    <tr>
+        <td>Number of Tickets:</td>
+        <td><span th:text="${session.numberOfTickets}"></span></td>
+    </tr>
+    <tr>
+        <td>Total Price:</td>
+        <td><span th:text="${session.numberOfTickets * session.tour.priceTicket}"></span></td>
+    </tr>
+
+    <tr>
+        <td>Book Date:</td>
+        <td><span th:text="${#dates.format(#now, 'dd/MM/yyyy HH:mm')}"></span></td>
+    </tr>
+</table>
+</body>
+</html>
