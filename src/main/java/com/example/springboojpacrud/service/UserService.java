@@ -47,6 +47,19 @@ public class UserService {
 
         return "errorlogin";
     }
+    public List<User> getRandom5Users() {
+        // Lấy danh sách tất cả người dùng có vai trò là "user"
+        List<User> users = userRepository.findByRole("user");
+
+        // Nếu có ít hơn 5 người dùng, bạn có thể xử lý theo ý của mình
+        // ở đây, tôi sử dụng Math.min để đảm bảo không bị lỗi index nếu danh sách nhỏ hơn 5
+        int count = Math.min(users.size(), 5);
+
+        // Lấy 5 người dùng ngẫu nhiên
+        List<User> randomUsers = users.subList(0, count);
+
+        return randomUsers;
+    }
 
 
 }

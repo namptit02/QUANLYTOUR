@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -52,7 +51,6 @@
 <script th:inline="javascript">
     /* Lấy giá vé từ biểu thức Thymeleaf */
     var pricePerTicket = [[${tour.priceTicket}]];
-
     document.getElementById('numberOfTickets').addEventListener('input', function () {
         var numberOfTickets = parseInt(document.getElementById('numberOfTickets').value);
         var totalPrice = pricePerTicket * numberOfTickets;
